@@ -1,4 +1,5 @@
-console.log("This is a simple Rock Paper Scissors game");
+console.log("This is a simple Rock Paper Scissors game.");
+let numberOfRounds = 5;
 
 const ROCK = "rock";
 const PAPER = "paper";
@@ -63,10 +64,23 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-function start() {
-    const humanChoice = getHumanChoice();
-    const computerChoice = getComputerChoice();
-    console.log(`You chose ${humanChoice}. Computer chose ${computerChoice}`);
-    playRound(humanChoice, computerChoice);
-    console.log(`End of game.\nYour Score: ${humanScore} | Computer score: ${computerScore}`);
+function playGame() {
+    console.log("Initialize game. Reset scores to 0");
+    humanScore = 0;
+    computerScore = 0;
+    for (let i = 0; i < numberOfRounds; i++) {
+        const humanChoice = getHumanChoice();
+        const computerChoice = getComputerChoice();
+        console.log(`You chose ${humanChoice}. Computer chose ${computerChoice}`);
+        playRound(humanChoice, computerChoice);
+        console.log(`End of round.\nYour Score: ${humanScore} | Computer score: ${computerScore}`);
+    }
+
+    if (humanScore > computerScore) {
+        console.log("You win overall!");
+    } else if (humanScore < computerScore) {
+        console.log("You lose overall :(");
+    } else {
+        console.log("It is a draw!");
+    }
 }
