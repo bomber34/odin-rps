@@ -47,8 +47,8 @@ function nonDrawText(verb, humanChoice, computerChoice) {
 
 function isWin(humanChoice, computerChoice) {
     return (humanChoice == ROCK && computerChoice == SCISSORS)
-        || (humanChoice == PAPER && computerChoice == ROCK)
-        || (humanChoice == SCISSORS && computerChoice == PAPER);
+        || (humanChoice == SCISSORS && computerChoice == PAPER)
+        || (humanChoice == PAPER && computerChoice == ROCK);
 }
 
 function playRound(humanChoice, computerChoice) {
