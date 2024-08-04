@@ -1,4 +1,12 @@
-let numberOfRounds = 5;
+const NUMBER_OF_WON_ROUNDS = 5;
+
+const ROCK = "rock";
+const PAPER = "paper";
+const SCISSORS = "scissors";
+
+const CHOICES = [ROCK, PAPER, SCISSORS];
+
+const INVISIBLE_CLASS = "invisibleOnLoad"
 
 const playerScoreText = document.getElementById("playerScoreText");
 const computerScoreText = document.getElementById("computerScoreText");
@@ -6,11 +14,6 @@ const playerChoiceText = document.getElementById("playerSelection");
 const computerChoiceText = document.getElementById("computerSelection");
 const matchText = document.getElementById("matchText");
 
-const ROCK = "rock";
-const PAPER = "paper";
-const SCISSORS = "scissors";
-
-const CHOICES = [ROCK, PAPER, SCISSORS];
 let humanScore = 0;
 let computerScore = 0;
 
@@ -56,9 +59,11 @@ function isWin(humanChoice, computerChoice) {
         || (humanChoice == PAPER && computerChoice == ROCK);
 }
 
-function ensureVisibility(elem) {
-    if (elem.style.visibility == "hidden") {
-        elem.style.visibility = "visible";
+function toggleVisibility(elem, isVisible) {
+    if (isVisible && elem.classList.contains(INVISIBLE_CLASS)) {
+        elem.classList.remove(INVISIBLE_CLASS);
+    } else if (!isVisible && !elem.classList.contains(INVISIBLE_CLASS)) {
+        elem.classList.add(INVISIBLE_CLASS);
     }
 }
 
@@ -70,7 +75,30 @@ function updateScoreText() {
 function updateChoiceTexts(humanChoice, computerChoice) {
     playerChoiceText.innerText = "You chose " + humanChoice;
     computerChoiceText.innerText = "Computer chose " + computerChoice;
-    ensureVisibility(computerChoiceText);
+    toggleVisibility(computerChoiceText, true);
+}
+
+function defaultTexts() {
+    playerChoiceText.innerText = "Choose rock, paper or scissors please!";
+    toggleVisibility(computerChoiceText, false);
+    toggleVisibility(matchText, false);
+}
+
+function isGameOver() {
+    return computerScore == NUMBER_OF_WON_ROUNDS || humanScore == NUMBER_OF_WON_ROUNDS
+}
+
+function handleGameOver() {
+    if (isGameOver()) {
+        let winner = humanScore == NUMBER_OF_WON_ROUNDS ? "You" : "Computer"
+        setTimeout(() => {
+            alert(`Game Over. ${winner} won`)
+            humanScore = 0;
+            computerScore = 0;
+            updateScoreText();
+            defaultTexts();
+        }, 0);
+    }
 }
 
 function playRound(humanChoice, computerChoice) {
@@ -85,8 +113,9 @@ function playRound(humanChoice, computerChoice) {
         nonDrawText("lose", computerChoice, humanChoice)
         computerScore++;
     }
-    ensureVisibility(matchText);
+    toggleVisibility(matchText, true);
     updateScoreText();
+    handleGameOver()
 }
 
 function addEvent(btn, id) {

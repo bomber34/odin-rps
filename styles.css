@@ -11,6 +11,10 @@ body {
     margin-bottom: 2em;
 }
 
+.invisibleOnLoad {
+    visibility: hidden;
+}
+
 #matchText {
     margin-top: 40px;
     text-align: center;
