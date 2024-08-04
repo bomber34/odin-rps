@@ -4,6 +4,22 @@ body {
     align-items: center;
 }
 
+#alert {
+    position: fixed;
+    left: 25%;
+    top: 40%;
+    -ms-transform: translate(-50%,-50%);
+    -moz-transform:translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%,-50%);
+    width: 400px;
+}
+
+.close {
+    visibility: collapse;
+}
+
 #scoreTexts {
     display: flex;
     min-width: 400px;

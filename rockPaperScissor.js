@@ -14,6 +14,25 @@ const playerChoiceText = document.getElementById("playerSelection");
 const computerChoiceText = document.getElementById("computerSelection");
 const matchText = document.getElementById("matchText");
 
+const alertDialog = document.querySelector("#alert")
+const alertBarOkBtn = document.getElementById("alertBarOkBtn")
+const alertBarCloseBtn = document.getElementById("alertBarCloseBtn");
+
+// from https://wiki.selfhtml.org/wiki/JavaScript/Tutorials/Eigene_modale_Dialogfenster#window.myAlert at 2024-08-4 19:30 CET
+window.myAlert = function (text, OK, cancel) {
+    let textElement = document.querySelector("#alertText");
+  
+    if (alertDialog && textElement) {
+      textElement.innerText = (text && text.length ? text : "");
+      
+      alertBarOkBtn.addEventListener("click", OK);
+      alertBarCloseBtn.addEventListener("click", cancel);
+      alertDialog.show();
+    }
+  }
+
+
+
 let humanScore = 0;
 let computerScore = 0;
 
@@ -88,20 +107,26 @@ function isGameOver() {
     return computerScore == NUMBER_OF_WON_ROUNDS || humanScore == NUMBER_OF_WON_ROUNDS
 }
 
+function resetGame() {
+    humanScore = 0;
+    computerScore = 0;
+    updateScoreText();
+    defaultTexts();
+    alertDialog.close();
+}
+
 function handleGameOver() {
     if (isGameOver()) {
         let winner = humanScore == NUMBER_OF_WON_ROUNDS ? "You" : "Computer"
-        setTimeout(() => {
-            alert(`Game Over. ${winner} won`)
-            humanScore = 0;
-            computerScore = 0;
-            updateScoreText();
-            defaultTexts();
-        }, 0);
+        window.myAlert(`Game Over. ${winner} won`, resetGame, resetGame);
     }
 }
 
 function playRound(humanChoice, computerChoice) {
+    if (alertDialog.open) {
+        return;
+    }
+
     updateChoiceTexts(humanChoice, computerChoice);
 
     if (humanChoice == computerChoice) {

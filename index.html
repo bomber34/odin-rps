@@ -8,6 +8,16 @@
     <script src="rockPaperScissor.js" defer></script>
 </head>
 <body>
+        <!-- custom alert dialogue -->
+        <dialog id="alert" role="dialog" aria-labelledby="alert-dialog-heading">
+            <button id="alertBarCloseBtn" class="close">Schließen</button>
+            <h2 id="alert-dialog-heading">Info</h2>
+            <p id="alertText">Dieses Fenster können Sie bedenkenlos wieder schließen.</p>
+            <p class="button-row">
+              <button id="alertBarOkBtn">OK</button>
+            </p>
+          </dialog>
+    <!-- normal content -->
     <h1>Rock Paper Scissors</h1>
     <h4>First player to get 5 points wins!</h2>
     <div id="scoreTexts">
