@@ -1,4 +1,3 @@
-console.log("This is a simple Rock Paper Scissors game.");
 let numberOfRounds = 5;
 
 const playerScoreText = document.getElementById("playerScoreText");
@@ -57,6 +56,12 @@ function isWin(humanChoice, computerChoice) {
         || (humanChoice == PAPER && computerChoice == ROCK);
 }
 
+function ensureVisibility(elem) {
+    if (elem.style.visibility == "hidden") {
+        elem.style.visibility = "visible";
+    }
+}
+
 function updateScoreText() {
     playerScoreText.innerText = "You: " + humanScore;
     computerScoreText.innerText = "Computer: " + computerScore;
@@ -65,6 +70,7 @@ function updateScoreText() {
 function updateChoiceTexts(humanChoice, computerChoice) {
     playerChoiceText.innerText = "You chose " + humanChoice;
     computerChoiceText.innerText = "Computer chose " + computerChoice;
+    ensureVisibility(computerChoiceText);
 }
 
 function playRound(humanChoice, computerChoice) {
@@ -79,6 +85,7 @@ function playRound(humanChoice, computerChoice) {
         nonDrawText("lose", computerChoice, humanChoice)
         computerScore++;
     }
+    ensureVisibility(matchText);
     updateScoreText();
 }
 

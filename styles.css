@@ -8,13 +8,21 @@ body {
     display: flex;
     min-width: 400px;
     justify-content: space-between;
+    margin-bottom: 2em;
+}
+
+#choiceInformationDiv {
+    text-align: left;
+    line-height: 10px;
+    margin: 2em auto;
+    min-width: 400px;
 }
 
 #action-div {
     display: flex;
     flex: 1;
     justify-content: space-between;
-    margin: 10em;
+    margin: 2em auto;
     min-width: 400px;
     max-width: 800px;
 }
