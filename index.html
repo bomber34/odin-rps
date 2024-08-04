@@ -3,14 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles.css"> 
     <title>Rock Paper Scissors!</title>
+    <script src="rockPaperScissor.js" defer></script>
 </head>
 <body>
-    <script src="rockPaperScissor.js"></script>
     <h1>Rock Paper Scissors</h1>
-    <p>This game is played via the browser console. Please press F12 to open your console.
-
-        The game is started with the 'playGame()' call!
-    </p>
+    <div id="scoreTexts">
+        <p id="playerScoreText">You: 0</p>
+        <p id="computerScoreText">Computer: 0</p>
+    </div>
+    <p id="playerSelection">Choose rock, paper or scissors please!</p>
+    <p id="computerSelection"></p>
+    <p id="matchText"></p>
+    <div id="action-div">
+        <button id="rockBtn">Rock</button>
+        <button id="paperBtn">Paper</button>
+        <button id="scissorsBtn">Scissors</button>
+    </div>
 </body>
 </html>

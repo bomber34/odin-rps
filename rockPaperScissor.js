@@ -1,6 +1,12 @@
 console.log("This is a simple Rock Paper Scissors game.");
 let numberOfRounds = 5;
 
+const playerScoreText = document.getElementById("playerScoreText");
+const computerScoreText = document.getElementById("computerScoreText");
+const playerChoiceText = document.getElementById("playerSelection");
+const computerChoiceText = document.getElementById("computerSelection");
+const matchText = document.getElementById("matchText");
+
 const ROCK = "rock";
 const PAPER = "paper";
 const SCISSORS = "scissors";
@@ -8,7 +14,6 @@ const SCISSORS = "scissors";
 const CHOICES = [ROCK, PAPER, SCISSORS];
 let humanScore = 0;
 let computerScore = 0;
-
 
 function getComputerChoice() {
     let choiceIndex = Math.floor(Math.random() * CHOICES.length);
@@ -39,11 +44,11 @@ function getHumanChoice() {
 }
 
 function drawText(choice) {
-    return `Draw! Both chose ${choice}`;
+    matchText.innerText = `Draw! Both chose ${choice}`;
 }
 
 function nonDrawText(verb, humanChoice, computerChoice) {
-    return `You ${verb}! ${humanChoice} beats ${computerChoice}`;
+    matchText.innerText = `You ${verb}! ${humanChoice} beats ${computerChoice}`;
 }
 
 function isWin(humanChoice, computerChoice) {
@@ -52,35 +57,40 @@ function isWin(humanChoice, computerChoice) {
         || (humanChoice == PAPER && computerChoice == ROCK);
 }
 
+function updateScoreText() {
+    playerScoreText.innerText = "You: " + humanScore;
+    computerScoreText.innerText = "Computer: " + computerScore;
+}
+
+function updateChoiceTexts(humanChoice, computerChoice) {
+    playerChoiceText.innerText = "You chose " + humanChoice;
+    computerChoiceText.innerText = "Computer chose " + computerChoice;
+}
+
 function playRound(humanChoice, computerChoice) {
+    updateChoiceTexts(humanChoice, computerChoice);
+
     if (humanChoice == computerChoice) {
-        console.log("Draw. Both chose " + humanChoice);
+        drawText(humanChoice);
     } else if (isWin(humanChoice, computerChoice)) {
-        console.log(nonDrawText("win", humanChoice, computerChoice));
+        nonDrawText("win", humanChoice, computerChoice)
         humanScore++;
     } else {
-        console.log(nonDrawText("lose", computerChoice, humanChoice));
+        nonDrawText("lose", computerChoice, humanChoice)
         computerScore++;
     }
+    updateScoreText();
 }
 
-function playGame() {
-    console.log("Initialize game. Reset scores to 0");
-    humanScore = 0;
-    computerScore = 0;
-    for (let i = 0; i < numberOfRounds; i++) {
-        const humanChoice = getHumanChoice();
-        const computerChoice = getComputerChoice();
-        console.log(`You chose ${humanChoice}. Computer chose ${computerChoice}`);
-        playRound(humanChoice, computerChoice);
-        console.log(`End of round.\nYour Score: ${humanScore} | Computer score: ${computerScore}`);
-    }
-
-    if (humanScore > computerScore) {
-        console.log("You win overall!");
-    } else if (humanScore < computerScore) {
-        console.log("You lose overall :(");
-    } else {
-        console.log("It is a draw!");
-    }
+function addEvent(btn, id) {
+    btn.addEventListener("click", () => {
+        playRound(CHOICES[id], getComputerChoice());
+    })
 }
+
+const rockBtn = document.getElementById("rockBtn");
+const paperBtn = document.getElementById("paperBtn");
+const scissorsBtn = document.getElementById("scissorsBtn");
+addEvent(rockBtn, 0);
+addEvent(paperBtn, 1);
+addEvent(scissorsBtn, 2);
