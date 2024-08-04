@@ -49,6 +49,23 @@ body {
     flex: 1;
     justify-content: space-between;
     margin: 2em auto;
-    min-width: 400px;
-    max-width: 800px;
+}
+
+.actionButtons {
+    background-color: transparent;
+    border-color: whitesmoke;
+    width: 300px;
+    height: 250px;
+    margin: 0px 30px;
+}
+
+.buttonCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0;
+    font-weight: bold;
+    font-size: 24px;
 }
